@@ -1,20 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="templates/main-template.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-	<head></head>
-	
-	<body>
-	
+	<ui:define name="content">
+
 		<f:metadata>
 			<f:viewAction action="#{schedulingBean.init}"></f:viewAction>
 		</f:metadata>
-	
-		<h:outputText value="#{schedulingBean.value}"></h:outputText>
-	</body>
 
 
-</html>
+		<h1>Planificación</h1>
+		<p> Elija los puntos de la ruta y la distribución de la mercancía en los camiones </p>
+		<h3>Ruta</h3>
+		<hr />
+		<h3>Mercancia</h3>
+
+
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>
