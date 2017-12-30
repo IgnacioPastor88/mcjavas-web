@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h3>Mercancías</h3>
+
+	<h:form id="formFreights">
+		<label>Capacidad del camión</label>
+		<div class="input-group mb-3">
+			<h:inputText value="#{schedulingBean.truckCapacity}" type="number" class="form-control" aria-label="Capacidad del camión" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">kg</span>
+			</div>
+		</div>
+
+		<label>Mercancías a transportar</label>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Mercancía</th>
+					<th scope="col">Peso unitario</th>
+					<th scope="col">Valor unitario</th>
+					<th scope="col">Número de unidades</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<ui:repeat var="freightInput" value="#{schedulingBean.freightInputs}">
+					<tr>
+						<td>#{freightInput.name}</td>
+						<td>#{freightInput.formatWeight()} kg</td>
+						<td>#{freightInput.value} €</td>
+						<td><h:inputText value="#{freightInput.quantity}" type="number" class="form-control" /></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+
+		<h:commandButton class="btn btn-primary" value="Calcular carga óptima" actionListener="#{schedulingBean.calculateOptimalLoad}">
+			<f:ajax execute=":formFreights" render=":formFreightOptimals" />
+		</h:commandButton>
+
+	</h:form>
+
+	<h:form id="formFreightOptimals" prependId="false">
+		<label>Mercancías a transportar (optimizado)</label>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Mercancía</th>
+					<th scope="col">Peso unitario</th>
+					<th scope="col">Valor unitario</th>
+					<th scope="col">Número de unidades</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<ui:repeat var="freightOptimal" value="#{schedulingBean.freightOptimals}">
+					<tr>
+						<td>#{freightOptimal.name}</td>
+						<td>#{freightOptimal.formatWeight()} kg</td>
+						<td>#{freightOptimal.value} €</td>
+						<td>#{freightOptimal.quantity}</td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+	</h:form>
+
+
+
+</ui:composition>

@@ -11,5 +11,6 @@
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.connection.pool_size">10</property>
 		<mapping class="com.iti.mcjavas.orm.model.Schedule"/>
+		<mapping class="com.iti.mcjavas.orm.model.Freight"/>
 	</session-factory>
 </hibernate-configuration> 
