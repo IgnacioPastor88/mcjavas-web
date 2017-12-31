@@ -18,7 +18,7 @@ public class Freight {
 	private String name;
 	@Column(name = "weight")
 	private Integer weight;
-	@Column(name = "value")
+	@Column(name = "val")
 	private Integer value;
 
 	// GETTERS & SETTERS
