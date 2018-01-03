@@ -26,6 +26,11 @@ public class SchedulingBean implements Serializable {
 	public void calculateOptimalLoad(){
 		freightOptimals = schedulingLogic.calculateOptimalLoad(truckCapacity, freightInputs);
 	}
+	
+	public void reloadOptimalLoad(){
+		freightOptimals = null;
+		freightInputs = schedulingLogic.loadFreights();
+	}
 
 	// GETTERS & SETTERS
 

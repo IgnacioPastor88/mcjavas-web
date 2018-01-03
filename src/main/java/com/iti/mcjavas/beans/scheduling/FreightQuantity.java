@@ -18,11 +18,6 @@ public class FreightQuantity {
 		this.quantity = 0;
 	}
 
-	public String formatWeight() {
-		String formattedWeight = String.valueOf((double) weight / 1000.0);
-		return formattedWeight;
-	}
-	
 	public Freight loadFreight() {
 		Freight freight = new Freight();
 		freight.setId(id);

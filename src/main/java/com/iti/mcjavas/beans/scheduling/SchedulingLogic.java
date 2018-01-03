@@ -25,7 +25,7 @@ public class SchedulingLogic {
 
 	public List<FreightQuantity> calculateOptimalLoad(Integer truckCapacity, List<FreightQuantity> freightInputs) {
 		List<FreightQuantity> freightOptimals = new ArrayList<FreightQuantity>();
-		BoundedKnapsack boundedKnapsack = new BoundedKnapsack(truckCapacity * 1000);
+		BoundedKnapsack boundedKnapsack = new BoundedKnapsack(truckCapacity);
 		
 		Map<Integer, Freight> freights = new HashMap<>();
 		for (FreightQuantity freightQuantity : freightInputs) {

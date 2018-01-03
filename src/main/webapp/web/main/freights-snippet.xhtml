@@ -14,6 +14,7 @@
 			</div>
 		</div>
 
+		<ui:fragment rendered="#{schedulingBean.freightOptimals==null}">
 		<label>Mercancías a transportar</label>
 		<table class="table">
 			<thead>
@@ -29,21 +30,19 @@
 				<ui:repeat var="freightInput" value="#{schedulingBean.freightInputs}">
 					<tr>
 						<td>#{freightInput.name}</td>
-						<td>#{freightInput.formatWeight()} kg</td>
+						<td>#{freightInput.weight} kg</td>
 						<td>#{freightInput.value} €</td>
 						<td><h:inputText value="#{freightInput.quantity}" type="number" class="form-control" /></td>
 					</tr>
 				</ui:repeat>
 			</tbody>
 		</table>
-
 		<h:commandButton class="btn btn-primary" value="Calcular carga óptima" actionListener="#{schedulingBean.calculateOptimalLoad}">
-			<f:ajax execute=":formFreights" render=":formFreightOptimals" />
+			<f:ajax execute=":formFreights" render=":formFreights" onevent="handleCalculateAjax" />
 		</h:commandButton>
-
-	</h:form>
-
-	<h:form id="formFreightOptimals" prependId="false">
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{schedulingBean.freightOptimals!=null}">
 		<label>Mercancías a transportar (optimizado)</label>
 		<table class="table">
 			<thead>
@@ -59,14 +58,28 @@
 				<ui:repeat var="freightOptimal" value="#{schedulingBean.freightOptimals}">
 					<tr>
 						<td>#{freightOptimal.name}</td>
-						<td>#{freightOptimal.formatWeight()} kg</td>
+						<td>#{freightOptimal.weight} kg</td>
 						<td>#{freightOptimal.value} €</td>
 						<td>#{freightOptimal.quantity}</td>
 					</tr>
 				</ui:repeat>
 			</tbody>
 		</table>
+		<h:commandButton class="btn btn-primary" value="Repetir calculo" actionListener="#{schedulingBean.reloadOptimalLoad}">
+			<f:ajax execute=":formFreights" render=":formFreights" />
+		</h:commandButton>
+		</ui:fragment>
+
+		
+
 	</h:form>
+	
+	<ui:include src="loading-snippet.xhtml"></ui:include>
+	
+
+	
+	
+	
 
 
 
