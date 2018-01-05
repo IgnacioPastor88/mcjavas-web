@@ -1,0 +1,231 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h3>Usuarios</h3>
+
+	<h:form id="formUsuarios">
+		<label>Agregar Usuario</label>
+		<div class="input-group mb-3">
+			<h:inputText value="#{cargaUsuariosBean.userVar}" type="text" class="form-control" aria-label="User" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">User</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{cargaUsuariosBean.passwordV}" type="password" class="form-control" aria-label="Password" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Password</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{cargaUsuariosBean.rolesV}" type="text" class="form-control" aria-label="Roles" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Roles</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{cargaUsuariosBean.nombreV}" type="text" class="form-control" aria-label="Nombre" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Nombre</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{cargaUsuariosBean.emailV}" type="email" class="form-control" aria-label="Email" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Email</span>
+			</div>
+		</div>
+	<h:commandButton class="btn btn-primary" value="Agregar" actionListener="#{cargaUsuariosBean.agregaUsuario}">
+			<f:ajax execute=":formUsuarios" render=":formUsuarios" />
+		</h:commandButton>
+		
+
+	</h:form>
+	
+	<ui:fragment rendered="#{cargaUsuariosBean.usuariosIngresados!=null}">
+		<label>Usuarios Agregados</label>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Usuario</th>
+					<th scope="col">Contraseña</th>
+					<th scope="col">Rol</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Email</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<ui:repeat var="usuarioIngresado" value="#{cargaUsuariosBean.usuariosIngresados}">
+					<tr>
+						<td>#{usuarioIngresado.user}</td>
+						<td>#{usuarioIngresado.password}</td>
+						<td>#{usuarioIngresado.roles}</td>
+						<td>#{usuarioIngresado.nombre}</td>
+						<td>#{usuarioIngresado.email}</td>
+						
+						
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+		</ui:fragment>
+	<hr size="50" />
+	<h3>Franquicias</h3>
+	
+	<h:form id="formFranquicias">
+		<label>Agregar Franquicias</label>
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminFranquiciasBean.lat}" type="text" class="form-control" aria-label="Latitud" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Latitud</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminFranquiciasBean.lon}" type="text" class="form-control" aria-label="Longitud" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Longitud</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminFranquiciasBean.nombre}" type="text" class="form-control" aria-label="Nombre" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Nombre</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminFranquiciasBean.dir}" type="text" class="form-control" aria-label="Direccion" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Direccion</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminFranquiciasBean.pais}" type="text" class="form-control" aria-label="Pais" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Pais</span>
+			</div>
+		</div>
+	<h:commandButton class="btn btn-primary" value="Agregar" actionListener="#{adminFranquiciasBean.agregaFranquicia}">
+			<f:ajax execute=":formFranquicias" render=":formFranquicias" />
+		</h:commandButton>
+		
+
+	</h:form>
+	
+	<ui:fragment rendered="#{adminFranquiciasBean.franquiciasIngresados!=null}">
+		<label>Franquicias Agregadas</label>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Latitud</th>
+					<th scope="col">Longitud</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Direccion</th>
+					<th scope="col">Pais</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<ui:repeat var="franquiciaIngresado" value="#{adminFranquiciasBean.franquiciasIngresados}">
+					<tr>
+						<td>#{franquiciaIngresado.latitud}</td>
+						<td>#{franquiciaIngresado.longitud}</td>
+						<td>#{franquiciaIngresado.nombre}</td>
+						<td>#{franquiciaIngresado.direccion}</td>
+						<td>#{franquiciaIngresado.pais}</td>
+						
+						
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+		</ui:fragment>
+		
+		<h3>Almacenes</h3>
+	
+	<h:form id="formAlmacenes">
+		<label>Agregar Almacenes</label>
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminAlmacenesBean.lat}" type="text" class="form-control" aria-label="Latitud" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Latitud</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminAlmacenesBean.lon}" type="text" class="form-control" aria-label="Longitud" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Longitud</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminAlmacenesBean.nombre}" type="text" class="form-control" aria-label="Nombre" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Nombre</span>
+			</div>
+		</div>
+	
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminAlmacenesBean.dir}" type="text" class="form-control" aria-label="Direccion" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Direccion</span>
+			</div>
+		</div>
+		
+		<div class="input-group mb-3">
+			<h:inputText value="#{adminAlmacenesBean.pais}" type="text" class="form-control" aria-label="Pais" aria-describedby="basic-addon2" />
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Pais</span>
+			</div>
+		</div>
+	<h:commandButton class="btn btn-primary" value="Agregar" actionListener="#{adminAlmacenesBean.agregaAlmacen}">
+			<f:ajax execute=":formAlmacenes" render=":formAlmacenes" />
+		</h:commandButton>
+		
+	</h:form>
+	
+	<ui:fragment rendered="#{adminAlmacenesBean.almacenesIngresados!=null}">
+		<label>Almacenes Agregados</label>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Latitud</th>
+					<th scope="col">Longitud</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Direccion</th>
+					<th scope="col">Pais</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<ui:repeat var="almacenIngresado" value="#{adminAlmacenesBean.almacenesIngresados}">
+					<tr>
+						<td>#{almacenIngresado.latitud}</td>
+						<td>#{almacenIngresado.longitud}</td>
+						<td>#{almacenIngresado.nombre}</td>
+						<td>#{almacenIngresado.direccion}</td>
+						<td>#{almacenIngresado.pais}</td>
+						
+						
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+		</ui:fragment>
+		
+		
+	<ui:include src="loading-snippet.xhtml"></ui:include>
+	
+
+</ui:composition>
