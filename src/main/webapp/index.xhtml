@@ -6,17 +6,15 @@
 	<ui:define name="content">
 
 		<f:metadata>
-			<f:viewAction action="#{cargaUsuariosBean.init}"></f:viewAction>
-			<f:viewAction action="#{adminFranquiciasBean.init}"></f:viewAction>
-			<f:viewAction action="#{adminAlmacenesBean.init}"></f:viewAction>
+			<f:viewAction action="#{schedulingBean.init}"></f:viewAction>
 		</f:metadata>
-		
 
 
-		<h1>Administrar Tablas</h1>
-		<p> Elija la tabla que desea modificar </p>
+		<h1>Planificación</h1>
+		<p> Elija los puntos de la ruta y la mercancía a transportar en el camión </p>
+		<h3>Ruta</h3>
 		<hr />
-		<ui:include src="web/main/usuarios-snippet.xhtml"></ui:include>
+		<ui:include src="web/main/freights-snippet.xhtml"></ui:include>
 
 
 

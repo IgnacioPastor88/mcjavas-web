@@ -1,0 +1,29 @@
+<ui:composition template="../../templates/main-template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewAction action="#{cargaUsuariosBean.init}"></f:viewAction>
+			<f:viewAction action="#{adminFranquiciasBean.init}"></f:viewAction>
+			<f:viewAction action="#{adminAlmacenesBean.init}"></f:viewAction>
+		</f:metadata>
+		
+
+
+		<h1>Administrar Tablas</h1>
+		<p> Elija la tabla que desea modificar </p>
+		<hr />
+		<ui:include src="../../web/main/usuarios-snippet.xhtml"></ui:include>
+
+
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>

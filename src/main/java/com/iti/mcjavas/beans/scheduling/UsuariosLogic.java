@@ -32,7 +32,9 @@ public class UsuariosLogic {
 		for (Usuarios usuario : usuarios) {
 			usuariosBean.add(new UsuariosBean(usuario));
 		}
-		System.out.println(usuariosBean.get(1).getUser()+"Lista");
+		if(usuariosBean.size()>1){
+			System.out.println(usuariosBean.get(1).getUser()+"Lista");
+		}
 		return usuariosBean;
 	}
 

@@ -27,7 +27,9 @@ public class FranquiciasLogic {
 		for (Franquicias franquicia : franquicias) {
 			franquiciasBean.add(new FranquiciasBean(franquicia));
 		}
-		System.out.println(franquiciasBean.get(0).getNombre()+"Lista");
+		if(!franquiciasBean.isEmpty()){
+			System.out.println(franquiciasBean.get(0).getNombre()+"Lista");
+		}
 
 		return franquiciasBean;
 	}
