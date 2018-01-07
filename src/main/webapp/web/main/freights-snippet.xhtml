@@ -8,66 +8,19 @@
 	<h:form id="formFreights">
 		<label>Capacidad del camión</label>
 		<div class="input-group mb-3">
-			<h:inputText value="#{schedulingBean.truckCapacity}" type="number" class="form-control" aria-label="Capacidad del camión" aria-describedby="basic-addon2" />
+			<h:inputText id="inputTruckCapacity" value="#{schedulingBean.truckCapacity}" type="number" class="form-control" aria-label="Capacidad del camión" aria-describedby="basic-addon2" 
+				required="true" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
 			<div class="input-group-append">
 				<span class="input-group-text" id="basic-addon2">kg</span>
 			</div>
 		</div>
 
 		<ui:fragment rendered="#{schedulingBean.freightOptimals==null}">
-		<label>Mercancías a transportar</label>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Mercancía</th>
-					<th scope="col">Peso unitario</th>
-					<th scope="col">Valor unitario</th>
-					<th scope="col">Número de unidades</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<ui:repeat var="freightInput" value="#{schedulingBean.freightInputs}">
-					<tr>
-						<td>#{freightInput.name}</td>
-						<td>#{freightInput.weight} kg</td>
-						<td>#{freightInput.value} €</td>
-						<td><h:inputText value="#{freightInput.quantity}" type="number" class="form-control" /></td>
-					</tr>
-				</ui:repeat>
-			</tbody>
-		</table>
-		<h:commandButton class="btn btn-primary" value="Calcular carga óptima" actionListener="#{schedulingBean.calculateOptimalLoad}">
-			<f:ajax execute=":formFreights" render=":formFreights" onevent="handleCalculateAjax" />
-		</h:commandButton>
+			<ui:include src="freights/freightsInputs-snippet.xhtml"></ui:include>
 		</ui:fragment>
 		
 		<ui:fragment rendered="#{schedulingBean.freightOptimals!=null}">
-		<label>Mercancías a transportar (optimizado)</label>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Mercancía</th>
-					<th scope="col">Peso unitario</th>
-					<th scope="col">Valor unitario</th>
-					<th scope="col">Número de unidades</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<ui:repeat var="freightOptimal" value="#{schedulingBean.freightOptimals}">
-					<tr>
-						<td>#{freightOptimal.name}</td>
-						<td>#{freightOptimal.weight} kg</td>
-						<td>#{freightOptimal.value} €</td>
-						<td>#{freightOptimal.quantity}</td>
-					</tr>
-				</ui:repeat>
-			</tbody>
-		</table>
-		<h:commandButton class="btn btn-primary" value="Repetir calculo" actionListener="#{schedulingBean.reloadOptimalLoad}">
-			<f:ajax execute=":formFreights" render=":formFreights" />
-		</h:commandButton>
+			<ui:include src="freights/freightsOptimal-snippet.xhtml"></ui:include>
 		</ui:fragment>
 
 

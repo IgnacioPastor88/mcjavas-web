@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<label>Mercancías a transportar (optimizado)</label>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Mercancía</th>
+				<th scope="col">Peso unitario</th>
+				<th scope="col">Valor unitario</th>
+				<th scope="col">Número de unidades</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<ui:repeat var="freightOptimal" value="#{schedulingBean.freightOptimals}">
+				<tr>
+					<td>#{freightOptimal.name}</td>
+					<td>#{freightOptimal.weight} kg</td>
+					<td>#{freightOptimal.value} €</td>
+					<td>#{freightOptimal.quantity}</td>
+				</tr>
+			</ui:repeat>
+		</tbody>
+	</table>
+	<h:commandButton class="btn btn-primary" value="Repetir calculo" actionListener="#{schedulingBean.reloadOptimalLoad}">
+		<f:ajax execute=":formFreights" render=":formFreights" />
+	</h:commandButton>
+
+</ui:composition>

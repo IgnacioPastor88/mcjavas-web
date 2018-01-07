@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<label>Mercancías a transportar</label>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Mercancía</th>
+				<th scope="col">Peso unitario</th>
+				<th scope="col">Valor unitario</th>
+				<th scope="col">Número de unidades</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<ui:repeat var="freightInput" value="#{schedulingBean.freightInputs}">
+				<tr>
+					<td>#{freightInput.name}</td>
+					<td>#{freightInput.weight} kg</td>
+					<td>#{freightInput.value} €</td>
+					<td><h:inputText value="#{freightInput.quantity}" type="number" class="form-control" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/></td>
+				</tr>
+			</ui:repeat>
+		</tbody>
+	</table>
+	<h:commandButton class="btn btn-primary" value="Calcular carga óptima" actionListener="#{schedulingBean.calculateOptimalLoad}">
+		<f:ajax execute=":formFreights" render=":formFreights" onevent="handleCalculateAjax" />
+	</h:commandButton>
+
+</ui:composition>
