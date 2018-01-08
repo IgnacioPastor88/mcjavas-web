@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Franquicias")
@@ -24,50 +25,66 @@ public class Franquicias {
 	private String Direccion;
 	@Column(name = "Pais")
 	private String Pais;
-	
-	
+
+	@Transient
+	private boolean selectedToRoute;
+
 	// GETTERS & SETTERS
-	
+
 	public int getId_franquicia() {
 		return Id_franquicia;
 	}
+
 	public void setId_franquicia(int id_franquicia) {
 		Id_franquicia = id_franquicia;
 	}
+
 	public String getLatitud() {
 		return Latitud;
 	}
+
 	public void setLatitud(String latitud) {
 		Latitud = latitud;
 	}
+
 	public String getLongitud() {
 		return Longitud;
 	}
+
 	public void setLongitud(String longitud) {
 		Longitud = longitud;
 	}
+
 	public String getNombre() {
 		return Nombre;
 	}
+
 	public void setNombre(String nombre) {
 		Nombre = nombre;
 	}
+
 	public String getDireccion() {
 		return Direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		Direccion = direccion;
 	}
+
 	public String getPais() {
 		return Pais;
 	}
+
 	public void setPais(String pais) {
 		Pais = pais;
 	}
-	
-	
-	
-	
-	
-	
+
+	public boolean isSelectedToRoute() {
+		return selectedToRoute;
+	}
+
+	public void setSelectedToRoute(boolean selectedToRoute) {
+		this.selectedToRoute = selectedToRoute;
+	}
+
 }

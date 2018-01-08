@@ -34,4 +34,11 @@ public class FranquiciasLogic {
 		return franquiciasBean;
 	}
 
+	public List<Franquicias> loadFranchises() {
+		List<Franquicias> f = franquiciasDao.findAll();
+
+		return f;
+	}
+
+
 }

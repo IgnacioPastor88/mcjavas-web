@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<h:panelGroup id="alertMessageFranchise">
+		<ui:fragment rendered="#{franquiciasBean.alertNumberFranchises}">
+			<div class="alert alert-warning" role="alert" id="alertBlockFranchise">
+			  <h:outputText value = "#{franquiciasBean.alertMessageFranchises}" />
+			</div>
+		</ui:fragment>
+	</h:panelGroup>
+
+
+	<h:dataTable value="#{franquiciasBean.franquicias}" var="franchise" 
+	id="tableFranchises" border="2"
+	class="table table-bordered" headerClass="tableHeader">
+		
+		<h:column >
+			<f:facet name="header">Pais</f:facet>
+            <h:outputLabel value="#{franchise.pais}"/>
+      	</h:column>
+      	
+		<h:column>
+			<f:facet name="header">Nombre franquicia</f:facet>
+			<h:outputLabel  id="nameFranchise" value="#{franchise.nombre}"/>
+      </h:column>
+      
+      <h:column>
+			<f:facet name="header">Dirección franquicia</f:facet>
+			<h:outputLabel value="#{franchise.direccion}"/>
+      </h:column>
+      
+        
+      <h:column pt:style="display: none" >
+			<f:facet name="header">Latitud franquicia</f:facet>
+			<h:outputLabel id="latitude" value="#{franchise.latitud}"/>
+      </h:column>
+        
+      <h:column pt:style="display: none">
+			<f:facet name="header">Longitud franquicia</f:facet>
+			<h:outputLabel id="longitude" value="#{franchise.longitud}"/>
+      </h:column>
+     
+       <h:column>
+       		<f:facet name="header">Repartir</f:facet>
+       		<h:form id="formSelectFranchises">
+				<h:selectBooleanCheckbox id="checkSelectFranchise" value="#{franchise.selectedToRoute}" 
+				onclick="return drawPin(this);">
+					<f:ajax event="click" listener="#{franquiciasBean.changeListener}"
+					render="@this :alertMessageFranchise"/>
+				</h:selectBooleanCheckbox>
+			</h:form>
+      </h:column>
+      
+	</h:dataTable>
+	
+	
+</ui:composition>

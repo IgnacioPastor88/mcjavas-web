@@ -13,11 +13,13 @@
 		<h:outputScript library="js" name="jquery-3.2.1.js" />
 		<h:outputScript library="js" name="popper-1.12.9.js" />
 		<h:outputScript library="js" name="bootstrap.js" />
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyBcnjn0QEnZLBiPqrgMUcmdQZ8xiVoXFfE "/>
+		<h:outputScript library="js" name="routing.js" />
 		<link rel="icon" type="image/x-icon" href="#{request.contextPath}/favicon.ico" />
 		<title>Mc Java's</title>
 	</h:head>
 	
-	<h:body>
+	<h:body  onload="unselectAllCheckboxes()">
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"> 
 	<h:form>
@@ -25,17 +27,23 @@
 			Mc Java's
 		</h:commandLink>
 	</h:form>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+	
+	
+	  <h:panelGroup layout="block" id="containerBotonLogout" style="margin-left:auto; margin-right:0;">
+		 <h:form>
+		 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</h:form>
+	</h:panelGroup>
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<h:form>
 				<!-- 				<li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li> -->
 				<li class="nav-item">
-					<h:commandLink styleClass="nav-link" action="web/admin/admin.xhtml?faces-redirect=true">
+					<h:commandLink styleClass="nav-link" action="web/admin/admin.xhtml?faces-redirect=true"  rendered="#{loginBean.logeado}" >
 						Administración
 					</h:commandLink>
 				</li>
@@ -47,10 +55,10 @@
 				<!-- 					</div></li> -->
 			</h:form>
 		</ul>
-		<!-- 			<form class="form-inline my-2 my-lg-0"> -->
-		<!-- 				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" /> -->
-		<!-- 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-		<!-- 			</form> -->
+			<h:form class="form-inline my-2 my-lg-0"> 
+						<h:commandButton class="btn btn-outline-success my-2 my-sm-0"  value="Cerrar sesión"
+				  rendered="#{loginBean.logeado}" action="#{loginBean.logout}"/>
+			</h:form>
 	</div>
 	</nav>
 

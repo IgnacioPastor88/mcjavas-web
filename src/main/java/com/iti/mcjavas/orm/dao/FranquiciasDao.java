@@ -17,90 +17,90 @@ import com.iti.mcjavas.orm.utils.HibernateUtil;
  */
 public class FranquiciasDao {
 
-
 	@SuppressWarnings("unchecked")
 	public List<Franquicias> findAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Criteria criteria = session.createCriteria(Franquicias.class);
-		criteria.addOrder(Order.asc("Id_franquicia"));
+
+		// criteria.addOrder(Order.asc("Id_franquicia"));
+		criteria.addOrder(Order.asc("Pais")).addOrder(Order.asc("Nombre"));
 		return criteria.list();
 	}
-	
-	 public void addUser(Franquicias franquicias) {
-	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
-	        try {
-	            trns = session.beginTransaction();
-	            session.save(franquicias);
-	            session.getTransaction().commit();
-	        } catch (RuntimeException e) {
-	            if (trns != null) {
-	                trns.rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            session.flush();
-	            session.close();
-	        }
-	    }
 
-    public void deleteUser(int franquiciasId) {
-        Transaction trns = null;
+	public void addUser(Franquicias franquicias) {
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			session.save(franquicias);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            Franquicias franquicias = (Franquicias) session.load(Franquicias.class, new Integer(franquiciasId));
-            session.delete(franquicias);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-    }
-    
-    public void updateUser(Franquicias franquicia) {
-        Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            session.update(franquicia);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-    }
-    
-    public Franquicias getUserById(int franquiciasId) {
-        Franquicias franquicia = null;
-        Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            String queryString = "from Franquicias where Id_franquicia = :Id_franquicia";
-            Query query = session.createQuery(queryString);
-            query.setInteger("Id_franquicia", franquiciasId);
-            franquicia = (Franquicias) query.uniqueResult();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        return franquicia;
-    }
-    
-    
+	public void deleteUser(int franquiciasId) {
+		Transaction trns = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Franquicias franquicias = (Franquicias) session.load(
+					Franquicias.class, new Integer(franquiciasId));
+			session.delete(franquicias);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
+
+	public void updateUser(Franquicias franquicia) {
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			session.update(franquicia);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
+
+	public Franquicias getUserById(int franquiciasId) {
+		Franquicias franquicia = null;
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			String queryString = "from Franquicias where Id_franquicia = :Id_franquicia";
+			Query query = session.createQuery(queryString);
+			query.setInteger("Id_franquicia", franquiciasId);
+			franquicia = (Franquicias) query.uniqueResult();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return franquicia;
+	}
 
 }

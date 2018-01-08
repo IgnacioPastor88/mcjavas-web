@@ -17,7 +17,6 @@ import com.iti.mcjavas.orm.utils.HibernateUtil;
  */
 public class UsuariosDao {
 
-
 	@SuppressWarnings("unchecked")
 	public List<Usuarios> findAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -26,81 +25,107 @@ public class UsuariosDao {
 		criteria.addOrder(Order.asc("IdUsuario"));
 		return criteria.list();
 	}
-	
-	 public void addUser(Usuarios usuarios) {
-	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
-	        try {
-	            trns = session.beginTransaction();
-	            session.save(usuarios);
-	            session.getTransaction().commit();
-	        } catch (RuntimeException e) {
-	            if (trns != null) {
-	                trns.rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            session.flush();
-	            session.close();
-	        }
-	    }
 
-    public void deleteUser(int userid) {
-        Transaction trns = null;
+	public void addUser(Usuarios usuarios) {
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			session.save(usuarios);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            Usuarios usuarios = (Usuarios) session.load(Usuarios.class, new Integer(userid));
-            session.delete(usuarios);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-    }
-    
-    public void updateUser(Usuarios user) {
-        Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            session.update(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-    }
-    
-    public Usuarios getUserById(int userid) {
-        Usuarios user = null;
-        Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            String queryString = "from Usuarios where IdUsuario = :IdUsuario";
-            Query query = session.createQuery(queryString);
-            query.setInteger("IdUsuario", userid);
-            user = (Usuarios) query.uniqueResult();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        return user;
-    }
-    
-    
+	public void deleteUser(int userid) {
+		Transaction trns = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Usuarios usuarios = (Usuarios) session.load(Usuarios.class,
+					new Integer(userid));
+			session.delete(usuarios);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
+
+	public void updateUser(Usuarios user) {
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			session.update(user);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+	}
+
+	public Usuarios getUserById(int userid) {
+		Usuarios user = null;
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			String queryString = "from Usuarios where IdUsuario = :IdUsuario";
+			Query query = session.createQuery(queryString);
+			query.setInteger("IdUsuario", userid);
+			user = (Usuarios) query.uniqueResult();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return user;
+	}
+
+	public static boolean checkUserByEmailPassword(String userEmail,
+			String userPassword) {
+		Usuarios user = null;
+		Transaction trns = null;
+		boolean existeUsuario = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			String queryString = "from Usuarios where Email = :Email and Password = :Password";
+			Query query = session.createQuery(queryString);
+			query.setString("Email", userEmail).setString("Password",
+					userPassword);
+
+			if ((Usuarios) query.uniqueResult() == null) {
+				existeUsuario = false;
+			} else {
+				existeUsuario = true;
+			}
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return existeUsuario;
+	}
 
 }

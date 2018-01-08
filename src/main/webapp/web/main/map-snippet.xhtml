@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+
+			  <div class="hr vpad"></div>
+			  
+			  <div>
+			    <table>
+			   <!--      <tr>
+			            <td colspan="2"><b>Configuración</b></td>
+			        </tr>
+			       -->
+			        <tr>
+			            <td>Evitar Autopistas: </td>
+			            <td>
+			                <select id="avoid-highways" class="form-control">
+			                    <option value="1">Habilitado</option>
+			                    <option value="0" selected="selected">Deshabilitado</option>
+			                </select>
+			            </td>
+			        </tr>
+			       <!--  
+			        <tr>
+			            <td>Population Size: </td>
+			            <td>
+			                <select id="population-size" class="form-control">
+			                    <option value="5">5</option>
+			                    <option value="10">10</option>
+			                    <option value="20">20</option>
+			                    <option value="50" selected="selected">50</option>
+			                    <option value="100">100</option>
+			                    <option value="200">200</option>
+			                </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>Mutation Rate: </td>
+			            <td>
+			                <select id="mutation-rate" class="form-control">
+			                    <option value="0.00">0.00</option>
+			                    <option value="0.05">0.01</option>
+			                    <option value="0.05">0.05</option>
+			                    <option value="0.1" selected="selected">0.1</option>
+			                    <option value="0.2">0.2</option>
+			                    <option value="0.4">0.4</option>
+			                    <option value="0.7">0.7</option>
+			                    <option value="1">1.0</option>
+			                </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>Crossover Rate: </td>
+			            <td>
+			                <select id="crossover-rate" class="form-control">
+			                    <option value="0.0">0.0</option>
+			                    <option value="0.1">0.1</option>
+			                    <option value="0.2">0.2</option>
+			                    <option value="0.3">0.3</option>
+			                    <option value="0.4">0.4</option>
+			                    <option value="0.5" selected="selected">0.5</option>
+			                    <option value="0.6">0.6</option>
+			                    <option value="0.7">0.7</option>
+			                    <option value="0.8">0.8</option>
+			                    <option value="0.9">0.9</option>
+			                    <option value="1">1.0</option>
+			                </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>Elitism: </td>
+			            <td>
+			                <select id="elitism" class="form-control">
+			                    <option value="1" selected="selected">Enabled</option>
+			                    <option value="0">Disabled</option>
+			                </select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>Max Generations: </td>
+			            <td>
+			                <select id="generations" class="form-control">
+			                    <option value="20">20</option>
+			                    <option value="50" selected="selected">50</option>
+			                    <option value="100">100</option>
+			                </select>
+			            </td>
+			        </tr>
+			        
+			        <tr>
+			            <td colspan="2"><b>Debug Info</b></td>
+			        </tr>
+			        <tr>
+			            <td>Destinations Count: </td>
+			            <td id="destinations-count">0</td>
+			        </tr>
+			        <tr class="ga-info">
+			            <td>Generations: </td><td id="generations-passed">0</td>
+			        </tr>
+			        <tr class="ga-info">
+			            <td>Best Time: </td><td id="best-time">?</td>
+			        </tr>
+			        
+			        -->
+			        <tr id="ga-buttons">
+			            <td colspan="2">
+			            	<!-- find route -->
+				         		<h:commandButton id="find-route" class="btn btn-primary" 
+				         		value="Calcular ruta" action="#{franquiciasBean.changeListener()}">
+									<f:actionListener binding="#{almacenesBean.changeListener()}" />
+									<f:ajax render=":alertMessage :alertMessageFranchise" />
+								</h:commandButton>	          
+				         
+          		<button id="clear-map" class="btn btn-primary">Borrar pines</button>
+			           
+			             </td>
+			        </tr>
+			    </table>
+			  </div>
+			  
+			   <div id="map-canvas" style="margin: auto; height:560px;"></div>
+			  
+			  
+</ui:composition>

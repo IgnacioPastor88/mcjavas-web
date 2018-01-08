@@ -1,0 +1,37 @@
+<ui:composition template="templates/main-template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewAction action="#{schedulingBean.init}"></f:viewAction>
+			<f:viewAction action="#{franquiciasBean.init}"></f:viewAction>
+			<f:viewAction action="#{franquiciasBean.onload}"></f:viewAction>
+			<f:viewAction action="#{almacenesBean.init}"></f:viewAction>
+			<f:viewAction action="#{almacenesBean.onload}"></f:viewAction>
+		
+		</f:metadata>
+
+
+		<h1>Planificación</h1>
+		<p> Elija los puntos de la ruta y la mercancía a transportar en el camión </p>
+		<hr />
+		<ui:include src="web/main/freights-snippet.xhtml"></ui:include>
+		<hr />
+		<h3>Ruta</h3>
+		<p> Elija el <b>almacén</b> desde donde distribuir la mercancía </p>
+		<ui:include src="web/main/warehouses-snippet.xhtml"/>
+		<p> Elija las <b>franquicias</b> (max. 9) donde distribuir la mercancía </p>
+		<ui:include src="web/main/franchises-snippet.xhtml"/>
+		<ui:include src="web/main/map-snippet.xhtml"/>
+
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>

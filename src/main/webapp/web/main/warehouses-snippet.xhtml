@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<h:panelGroup id="alertMessage">
+		<ui:fragment rendered="#{almacenesBean.alertNumberWarehouses}">
+			<div class="alert alert-warning" role="alert"  id="alertBlockWarehouse">
+			  	<h:outputText value = "#{almacenesBean.alertMessage}" />
+			</div>
+		</ui:fragment>
+	</h:panelGroup>
+
+	<h:dataTable value="#{almacenesBean.almacenes}" var="warehouse" 
+	id="tableWarehouses" border="2"
+	class="table table-bordered" headerClass="tableHeader">
+		
+		<h:column >
+			<f:facet name="header">Pais</f:facet>
+            <h:outputLabel value="#{warehouse.pais}"/>
+      	</h:column>
+      	
+		<h:column>
+			<f:facet name="header">Nombre almacén</f:facet>
+			<h:outputLabel  id="nameWarehouse" value="#{warehouse.nombre}"/>
+      </h:column>
+      
+      <h:column>
+			<f:facet name="header">Dirección almacén</f:facet>
+			<h:outputLabel value="#{warehouse.direccion}"/>
+      </h:column>
+      
+        
+      <h:column pt:style="display: none" >
+			<f:facet name="header">Latitud almacén</f:facet>
+			<h:outputLabel id="latitude" value="#{warehouse.latitud}"/>
+      </h:column>
+        
+      <h:column pt:style="display: none">
+			<f:facet name="header">Longitud almacén</f:facet>
+			<h:outputLabel id="longitude" value="#{warehouse.longitud}"/>
+      </h:column>
+     
+       <h:column>
+       		<f:facet name="header">Repartir</f:facet>
+       		<h:form id="formSelectWarehouses">
+				<h:selectBooleanCheckbox id="checkSelectWarehouse" value="#{warehouse.selectedToRoute}" 
+				   onclick="return drawPin(this);">
+				   <f:ajax event="click" listener="#{almacenesBean.changeListener}"
+					render="@this :alertMessage"/>
+				</h:selectBooleanCheckbox>
+				</h:form>	
+      </h:column>
+      
+	</h:dataTable>
+ 
+</ui:composition>

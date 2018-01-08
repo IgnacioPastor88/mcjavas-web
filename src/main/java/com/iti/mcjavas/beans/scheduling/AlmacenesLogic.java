@@ -10,8 +10,9 @@ public class AlmacenesLogic {
 
 	private AlmacenesDao almacenesDao = new AlmacenesDao();
 
-	public void agregaAlmacenes (String latitud,String longitud,String nombre,String dir,String pais) {
-		
+	public void agregaAlmacenes(String latitud, String longitud, String nombre,
+			String dir, String pais) {
+
 		Almacenes fran = new Almacenes();
 		fran.setLatitud(latitud);
 		fran.setLongitud(longitud);
@@ -19,16 +20,22 @@ public class AlmacenesLogic {
 		fran.setDireccion(dir);
 		fran.setPais(pais);
 		almacenesDao.addUser(fran);
-		
+
 	}
-	
+
 	public List<AlmacenesBean> loadalmacenesBean() {
 		List<AlmacenesBean> almacenesBean = new ArrayList<>();
-		List<Almacenes> almacenes = almacenesDao.findAll();
+		List<Almacenes> almacenes = AlmacenesDao.findAll();
 		for (Almacenes almacen : almacenes) {
 			almacenesBean.add(new AlmacenesBean(almacen));
 		}
 		return almacenesBean;
+	}
+
+	public List<Almacenes> loadWarehouses() {
+		List<Almacenes> f = AlmacenesDao.findAll();
+
+		return f;
 	}
 
 }
