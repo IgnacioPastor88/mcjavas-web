@@ -66,21 +66,13 @@ public class LoginBean implements Serializable {
 		}
 	}
 
-	/*
-	 * public boolean isUserLoged() { HttpSession session = (HttpSession)
-	 * FacesContext.getCurrentInstance()
-	 * .getExternalContext().getSession(false);
-	 * 
-	 * boolean b; if (session.getAttribute("email").toString() != null) { b =
-	 * true; } else { b = false; } return b; }
-	 */
-
 	// logout event, invalidate session
 	public String logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		logeado = false;
 		alertLoginIncorrect = false;
-		return "login?faces-redirect=true";
+		return "/login?faces-redirect=true";
 	}
+
 }
