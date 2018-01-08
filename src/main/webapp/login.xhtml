@@ -6,6 +6,7 @@
 
 	<ui:define name="content">
 	
+	 <f:event type="preRenderView" listener="#{loginBean.redirectLogedUser}" />
 	<h:panelGroup id="alertMessageLogin">
 		<ui:fragment rendered="#{loginBean.alertLoginIncorrect}">
 			<div class="alert alert-danger" role="alert" id="alertBlockLogin">

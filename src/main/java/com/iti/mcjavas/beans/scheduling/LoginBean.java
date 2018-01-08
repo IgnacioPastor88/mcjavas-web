@@ -2,8 +2,11 @@ package com.iti.mcjavas.beans.scheduling;
 
 import java.io.Serializable;
 
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.HttpSession;
 
 import com.iti.mcjavas.orm.dao.UsuariosDao;
@@ -73,6 +76,19 @@ public class LoginBean implements Serializable {
 		logeado = false;
 		alertLoginIncorrect = false;
 		return "/login?faces-redirect=true";
+	}
+
+	public void redirectLogedUser(ComponentSystemEvent event) {
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		if (logeado) {
+
+			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc
+					.getApplication().getNavigationHandler();
+
+			nav.performNavigation("menu.xhtml?faces-redirect=true");
+		}
 	}
 
 }
