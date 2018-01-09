@@ -21,6 +21,7 @@ public class LoginBean implements Serializable {
 	private String email;
 	private boolean alertLoginIncorrect;
 	private boolean logeado = false;
+	private boolean userAdmin;
 
 	public boolean isAlertLoginIncorrect() {
 		return alertLoginIncorrect;
@@ -54,6 +55,14 @@ public class LoginBean implements Serializable {
 		this.logeado = logeado;
 	}
 
+	public boolean isUserAdmin() {
+		return userAdmin;
+	}
+
+	public void setUserAdmin(boolean userAdmin) {
+		this.userAdmin = userAdmin;
+	}
+
 	// validate login
 	public String validateUsernamePassword() {
 		boolean valid = UsuariosDao.checkUserByEmailPassword(email, password);
@@ -62,6 +71,12 @@ public class LoginBean implements Serializable {
 			session.setAttribute("email", email);
 			alertLoginIncorrect = false;
 			logeado = true;
+			if (UsuariosDao.isLogedUserAdmin(email)) {
+				userAdmin = true;
+			} else {
+				userAdmin = false;
+			}
+
 			return "menu?faces-redirect=true";
 		} else {
 			alertLoginIncorrect = true;
@@ -73,22 +88,27 @@ public class LoginBean implements Serializable {
 	public String logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
+		userAdmin = false;
 		logeado = false;
 		alertLoginIncorrect = false;
 		return "/login?faces-redirect=true";
 	}
 
+	// Un usuario logeado no puede ir a login.xhtml
 	public void redirectLogedUser(ComponentSystemEvent event) {
 
 		FacesContext fc = FacesContext.getCurrentInstance();
 
 		if (logeado) {
-
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc
 					.getApplication().getNavigationHandler();
 
 			nav.performNavigation("menu.xhtml?faces-redirect=true");
 		}
+	}
+
+	public void init() {
+		setAlertLoginIncorrect(false);
 	}
 
 }

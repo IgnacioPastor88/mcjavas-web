@@ -128,4 +128,29 @@ public class UsuariosDao {
 		return existeUsuario;
 	}
 
+	public static boolean isLogedUserAdmin(String userEmail) {
+		Transaction trns = null;
+		boolean isUserAdmin = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			trns = session.beginTransaction();
+			String queryString = "select u.Roles from Usuarios u where Email = :Email";
+			Query query = session.createQuery(queryString);
+			query.setString("Email", userEmail);
+
+			String rol = (String) query.uniqueResult();
+
+			if (rol.equals("admin")) {
+				isUserAdmin = true;
+			} else {
+				isUserAdmin = false;
+			}
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return isUserAdmin;
+	}
 }

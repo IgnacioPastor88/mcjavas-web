@@ -6,6 +6,10 @@
 
 	<ui:define name="content">
 	
+		<f:metadata>
+			<f:viewAction action="#{loginBean.init}"></f:viewAction>
+		</f:metadata>
+		
 	 <f:event type="preRenderView" listener="#{loginBean.redirectLogedUser}" />
 	<h:panelGroup id="alertMessageLogin">
 		<ui:fragment rendered="#{loginBean.alertLoginIncorrect}">
