@@ -45,18 +45,12 @@ public class UsuariosDao {
 	}
 
 	public void deleteUser(int userid) {
-		Transaction trns = null;
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Usuarios usuarios = (Usuarios) session.load(Usuarios.class,
-					new Integer(userid));
+			Usuarios usuarios = (Usuarios) session.load(Usuarios.class, new Integer(userid));
 			session.delete(usuarios);
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (trns != null) {
-				trns.rollback();
-			}
 			e.printStackTrace();
 		} finally {
 			session.flush();
@@ -84,10 +78,9 @@ public class UsuariosDao {
 
 	public Usuarios getUserById(int userid) {
 		Usuarios user = null;
-		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
+			session.beginTransaction();
 			String queryString = "from Usuarios where IdUsuario = :IdUsuario";
 			Query query = session.createQuery(queryString);
 			query.setInteger("IdUsuario", userid);
@@ -101,18 +94,14 @@ public class UsuariosDao {
 		return user;
 	}
 
-	public static boolean checkUserByEmailPassword(String userEmail,
-			String userPassword) {
-		Usuarios user = null;
-		Transaction trns = null;
+	public static boolean checkUserByEmailPassword(String userEmail, String userPassword) {
 		boolean existeUsuario = false;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
+			session.beginTransaction();
 			String queryString = "from Usuarios where Email = :Email and Password = :Password";
 			Query query = session.createQuery(queryString);
-			query.setString("Email", userEmail).setString("Password",
-					userPassword);
+			query.setString("Email", userEmail).setString("Password", userPassword);
 
 			if ((Usuarios) query.uniqueResult() == null) {
 				existeUsuario = false;
@@ -129,11 +118,11 @@ public class UsuariosDao {
 	}
 
 	public static boolean isLogedUserAdmin(String userEmail) {
-		Transaction trns = null;
+
 		boolean isUserAdmin = false;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
+			session.beginTransaction();
 			String queryString = "select u.Roles from Usuarios u where Email = :Email";
 			Query query = session.createQuery(queryString);
 			query.setString("Email", userEmail);

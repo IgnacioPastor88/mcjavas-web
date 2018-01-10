@@ -1,12 +1,9 @@
 package com.iti.mcjavas.beans.scheduling;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.iti.mcjavas.orm.dao.UsuariosDao;
-import com.iti.mcjavas.orm.model.Freight;
 import com.iti.mcjavas.orm.model.Usuarios;
 
 public class UsuariosLogic {

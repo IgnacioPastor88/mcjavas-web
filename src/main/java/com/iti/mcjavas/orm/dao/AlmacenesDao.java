@@ -46,8 +46,6 @@ public class AlmacenesDao {
 	}
 
 	public void deleteUser(int almacenesId) {
-		Transaction trns = null;
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Almacenes almacenes = (Almacenes) session.load(Almacenes.class,
@@ -55,9 +53,6 @@ public class AlmacenesDao {
 			session.delete(almacenes);
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (trns != null) {
-				trns.rollback();
-			}
 			e.printStackTrace();
 		} finally {
 			session.flush();
@@ -85,10 +80,9 @@ public class AlmacenesDao {
 
 	public Almacenes getUserById(int almacenesId) {
 		Almacenes almacen = null;
-		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
+			session.beginTransaction();
 			String queryString = "from Almacenes where Id_Almacenes = :Id_Almacenes";
 			Query query = session.createQuery(queryString);
 			query.setInteger("Id_Almacenes", almacenesId);

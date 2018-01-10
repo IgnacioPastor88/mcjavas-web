@@ -47,18 +47,12 @@ public class FranquiciasDao {
 	}
 
 	public void deleteUser(int franquiciasId) {
-		Transaction trns = null;
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Franquicias franquicias = (Franquicias) session.load(
-					Franquicias.class, new Integer(franquiciasId));
+			Franquicias franquicias = (Franquicias) session.load(Franquicias.class, new Integer(franquiciasId));
 			session.delete(franquicias);
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (trns != null) {
-				trns.rollback();
-			}
 			e.printStackTrace();
 		} finally {
 			session.flush();
@@ -86,10 +80,9 @@ public class FranquiciasDao {
 
 	public Franquicias getUserById(int franquiciasId) {
 		Franquicias franquicia = null;
-		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
+			session.beginTransaction();
 			String queryString = "from Franquicias where Id_franquicia = :Id_franquicia";
 			Query query = session.createQuery(queryString);
 			query.setInteger("Id_franquicia", franquiciasId);
