@@ -1,5 +1,5 @@
 CREATE TABLE `Almacenes` (
-  `Id_Almacenes` int(11) NOT NULL,
+  `Id_Almacenes` int(11) NOT NULL AUTO_INCREMENT,
   `Latitud` varchar(45) DEFAULT NULL,
   `Longitud` varchar(45) DEFAULT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `Almacenes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Franquicias` (
-  `Id_franquicia` int(11) NOT NULL,
+  `Id_franquicia` int(11) NOT NULL AUTO_INCREMENT,
   `Latitud` varchar(45) DEFAULT NULL,
   `Longitud` varchar(45) DEFAULT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
